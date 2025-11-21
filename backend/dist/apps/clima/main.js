@@ -18,27 +18,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var _a, _b;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ClimaController = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 const clima_service_1 = __webpack_require__(/*! ./clima.service */ "./apps/clima/src/clima.service.ts");
+const Insert_clima_data_request_1 = __webpack_require__(/*! ./dto/Insert-clima-data.request */ "./apps/clima/src/dto/Insert-clima-data.request.ts");
 let ClimaController = class ClimaController {
     climaService;
     constructor(climaService) {
         this.climaService = climaService;
     }
-    getHello() {
-        return this.climaService.getHello();
+    async insertClimaData(request) {
+        return this.climaService.insertClimaData(request);
     }
 };
 exports.ClimaController = ClimaController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Post)(),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], ClimaController.prototype, "getHello", null);
+    __metadata("design:paramtypes", [typeof (_b = typeof Insert_clima_data_request_1.InsertClimaDataRequest !== "undefined" && Insert_clima_data_request_1.InsertClimaDataRequest) === "function" ? _b : Object]),
+    __metadata("design:returntype", Promise)
+], ClimaController.prototype, "insertClimaData", null);
 exports.ClimaController = ClimaController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [typeof (_a = typeof clima_service_1.ClimaService !== "undefined" && clima_service_1.ClimaService) === "function" ? _a : Object])
@@ -71,6 +76,9 @@ const clima_controller_1 = __webpack_require__(/*! ./clima.controller */ "./apps
 const clima_service_1 = __webpack_require__(/*! ./clima.service */ "./apps/clima/src/clima.service.ts");
 const joi_1 = __importDefault(__webpack_require__(/*! joi */ "joi"));
 const common_2 = __webpack_require__(/*! @app/common */ "./libs/common/src/index.ts");
+const clima_repository_1 = __webpack_require__(/*! ./clima.repository */ "./apps/clima/src/clima.repository.ts");
+const mongoose_1 = __webpack_require__(/*! @nestjs/mongoose */ "@nestjs/mongoose");
+const clima_schema_1 = __webpack_require__(/*! ./schemas/clima.schema */ "./apps/clima/src/schemas/clima.schema.ts");
 let ClimaModule = class ClimaModule {
 };
 exports.ClimaModule = ClimaModule;
@@ -81,15 +89,62 @@ exports.ClimaModule = ClimaModule = __decorate([
                 isGlobal: true,
                 validationSchema: joi_1.default.object({
                     MONGODB_URI: joi_1.default.string().required(),
+                    PORT: joi_1.default.number().required(),
                 }),
                 envFilePath: './apps/clima/.env',
             }),
             common_2.DatabaseModule,
+            mongoose_1.MongooseModule.forFeature([{ name: clima_schema_1.Clima.name, schema: clima_schema_1.ClimaSchema }]),
         ],
         controllers: [clima_controller_1.ClimaController],
-        providers: [clima_service_1.ClimaService],
+        providers: [clima_service_1.ClimaService, clima_repository_1.ClimaRepository],
     })
 ], ClimaModule);
+
+
+/***/ }),
+
+/***/ "./apps/clima/src/clima.repository.ts":
+/*!********************************************!*\
+  !*** ./apps/clima/src/clima.repository.ts ***!
+  \********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
+var ClimaRepository_1;
+var _a, _b;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ClimaRepository = void 0;
+const common_1 = __webpack_require__(/*! @app/common */ "./libs/common/src/index.ts");
+const common_2 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const clima_schema_1 = __webpack_require__(/*! ./schemas/clima.schema */ "./apps/clima/src/schemas/clima.schema.ts");
+const mongoose_1 = __webpack_require__(/*! @nestjs/mongoose */ "@nestjs/mongoose");
+const mongoose_2 = __webpack_require__(/*! mongoose */ "mongoose");
+let ClimaRepository = ClimaRepository_1 = class ClimaRepository extends common_1.AbstractRepository {
+    logger = new common_2.Logger(ClimaRepository_1.name);
+    constructor(climaModel, connection) {
+        super(climaModel, connection);
+    }
+};
+exports.ClimaRepository = ClimaRepository;
+exports.ClimaRepository = ClimaRepository = ClimaRepository_1 = __decorate([
+    (0, common_2.Injectable)(),
+    __param(0, (0, mongoose_1.InjectModel)(clima_schema_1.Clima.name)),
+    __param(1, (0, mongoose_1.InjectConnection)()),
+    __metadata("design:paramtypes", [typeof (_a = typeof mongoose_2.Model !== "undefined" && mongoose_2.Model) === "function" ? _a : Object, typeof (_b = typeof mongoose_2.Connection !== "undefined" && mongoose_2.Connection) === "function" ? _b : Object])
+], ClimaRepository);
 
 
 /***/ }),
@@ -111,14 +166,92 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ClimaService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
 let ClimaService = class ClimaService {
-    getHello() {
-        return 'Hello World!';
-    }
+    insertClimaData;
 };
 exports.ClimaService = ClimaService;
 exports.ClimaService = ClimaService = __decorate([
     (0, common_1.Injectable)()
 ], ClimaService);
+
+
+/***/ }),
+
+/***/ "./apps/clima/src/dto/Insert-clima-data.request.ts":
+/*!*********************************************************!*\
+  !*** ./apps/clima/src/dto/Insert-clima-data.request.ts ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.InsertClimaDataRequest = void 0;
+const class_validator_1 = __webpack_require__(/*! class-validator */ "class-validator");
+class InsertClimaDataRequest {
+    table;
+    timestamp;
+}
+exports.InsertClimaDataRequest = InsertClimaDataRequest;
+__decorate([
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], InsertClimaDataRequest.prototype, "table", void 0);
+__decorate([
+    (0, class_validator_1.IsDate)(),
+    __metadata("design:type", typeof (_a = typeof Date !== "undefined" && Date) === "function" ? _a : Object)
+], InsertClimaDataRequest.prototype, "timestamp", void 0);
+
+
+/***/ }),
+
+/***/ "./apps/clima/src/schemas/clima.schema.ts":
+/*!************************************************!*\
+  !*** ./apps/clima/src/schemas/clima.schema.ts ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ClimaSchema = exports.Clima = void 0;
+const mongoose_1 = __webpack_require__(/*! @nestjs/mongoose */ "@nestjs/mongoose");
+const common_1 = __webpack_require__(/*! @app/common */ "./libs/common/src/index.ts");
+let Clima = class Clima extends common_1.AbstractDocument {
+    table;
+    TimeStamp;
+};
+exports.Clima = Clima;
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Clima.prototype, "table", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", typeof (_a = typeof Date !== "undefined" && Date) === "function" ? _a : Object)
+], Clima.prototype, "TimeStamp", void 0);
+exports.Clima = Clima = __decorate([
+    (0, mongoose_1.Schema)({ versionKey: false })
+], Clima);
+exports.ClimaSchema = mongoose_1.SchemaFactory.createForClass(Clima);
 
 
 /***/ }),
@@ -330,6 +463,16 @@ module.exports = require("@nestjs/mongoose");
 
 /***/ }),
 
+/***/ "class-validator":
+/*!**********************************!*\
+  !*** external "class-validator" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = require("class-validator");
+
+/***/ }),
+
 /***/ "joi":
 /*!**********************!*\
   !*** external "joi" ***!
@@ -388,9 +531,13 @@ var exports = __webpack_exports__;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __webpack_require__(/*! @nestjs/core */ "@nestjs/core");
 const clima_module_1 = __webpack_require__(/*! ./clima.module */ "./apps/clima/src/clima.module.ts");
+const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const config_1 = __webpack_require__(/*! @nestjs/config */ "@nestjs/config");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(clima_module_1.ClimaModule);
-    await app.listen(process.env.port ?? 3000);
+    app.useGlobalPipes(new common_1.ValidationPipe());
+    const configService = app.get(config_1.ConfigService);
+    await app.listen(configService.get('PORT') || 3000);
 }
 bootstrap();
 

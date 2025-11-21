@@ -13,10 +13,4 @@ describe('ClimaController', () => {
 
     climaController = app.get<ClimaController>(ClimaController);
   });
-
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(climaController.getHello()).toBe('Hello World!');
-    });
-  });
 });
