@@ -32,8 +32,8 @@ let ClimaController = class ClimaController {
     constructor(climaService) {
         this.climaService = climaService;
     }
-    async insertClimaData(request) {
-        return this.climaService.insertClimaData(request);
+    async inserirClimaData(request) {
+        return this.climaService.inserirtClimaData(request);
     }
 };
 exports.ClimaController = ClimaController;
@@ -41,9 +41,9 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [typeof (_b = typeof Insert_clima_data_request_1.InsertClimaDataRequest !== "undefined" && Insert_clima_data_request_1.InsertClimaDataRequest) === "function" ? _b : Object]),
+    __metadata("design:paramtypes", [typeof (_b = typeof Insert_clima_data_request_1.salvarClimaDataDto !== "undefined" && Insert_clima_data_request_1.salvarClimaDataDto) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
-], ClimaController.prototype, "insertClimaData", null);
+], ClimaController.prototype, "inserirClimaData", null);
 exports.ClimaController = ClimaController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [typeof (_a = typeof clima_service_1.ClimaService !== "undefined" && clima_service_1.ClimaService) === "function" ? _a : Object])
@@ -162,15 +162,63 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ClimaService = void 0;
 const common_1 = __webpack_require__(/*! @nestjs/common */ "@nestjs/common");
+const clima_repository_1 = __webpack_require__(/*! ./clima.repository */ "./apps/clima/src/clima.repository.ts");
 let ClimaService = class ClimaService {
-    insertClimaData;
+    climaRepository;
+    constructor(climaRepository) {
+        this.climaRepository = climaRepository;
+    }
+    async inserirtClimaData(dto) {
+        try {
+            const recordsCount = dto.hourly.time.length;
+            const hourlyRecords = [];
+            for (let i = 0; i < recordsCount; i++) {
+                hourlyRecords.push({
+                    time: dto.hourly.time[i],
+                    temperature: dto.hourly.temperature_2m[i],
+                    humidity: dto.hourly.relative_humidity_2m[i],
+                    apparent_temperature: dto.hourly.apparent_temperature[i],
+                    precipitation_probability: dto.hourly.precipitation_probability[i],
+                    rain: dto.hourly.rain[i],
+                    snowfall: dto.hourly.snowfall[i],
+                    snow_depth: dto.hourly.snow_depth[i],
+                    visibility: dto.hourly.visibility[i],
+                    wind_speed: dto.hourly.wind_speed_10m[i],
+                    uv_index: dto.hourly.uv_index[i],
+                    is_day: dto.hourly.is_day[i],
+                });
+            }
+            const payload = {
+                latitude: dto.latitude,
+                longitude: dto.longitude,
+                elevation: dto.elevation,
+                timezone: dto.timezone,
+                hourly_units: dto.hourly_units,
+                hourly: hourlyRecords,
+                generationtime_ms: dto.generationtime_ms,
+                utc_offset_seconds: dto.utc_offset_seconds,
+                timezone_abbreviation: dto.timezone_abbreviation,
+                createdAt: new Date(),
+            };
+            return await this.climaRepository.create(payload);
+        }
+        catch (error) {
+            console.error('Erro ao salvar dados climáticos:', error);
+            throw new common_1.InternalServerErrorException('Erro ao salvar dados');
+        }
+    }
 };
 exports.ClimaService = ClimaService;
 exports.ClimaService = ClimaService = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [typeof (_a = typeof clima_repository_1.ClimaRepository !== "undefined" && clima_repository_1.ClimaRepository) === "function" ? _a : Object])
 ], ClimaService);
 
 
@@ -194,22 +242,56 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.InsertClimaDataRequest = void 0;
+exports.salvarClimaDataDto = void 0;
 const class_validator_1 = __webpack_require__(/*! class-validator */ "class-validator");
-class InsertClimaDataRequest {
-    table;
-    timestamp;
+class salvarClimaDataDto {
+    latitude;
+    longitude;
+    generationtime_ms;
+    utc_offset_seconds;
+    timezone;
+    timezone_abbreviation;
+    elevation;
+    hourly_units;
+    hourly;
 }
-exports.InsertClimaDataRequest = InsertClimaDataRequest;
+exports.salvarClimaDataDto = salvarClimaDataDto;
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], salvarClimaDataDto.prototype, "latitude", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], salvarClimaDataDto.prototype, "longitude", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], salvarClimaDataDto.prototype, "generationtime_ms", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], salvarClimaDataDto.prototype, "utc_offset_seconds", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], InsertClimaDataRequest.prototype, "table", void 0);
+], salvarClimaDataDto.prototype, "timezone", void 0);
 __decorate([
-    (0, class_validator_1.IsDate)(),
-    __metadata("design:type", typeof (_a = typeof Date !== "undefined" && Date) === "function" ? _a : Object)
-], InsertClimaDataRequest.prototype, "timestamp", void 0);
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], salvarClimaDataDto.prototype, "timezone_abbreviation", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], salvarClimaDataDto.prototype, "elevation", void 0);
+__decorate([
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", typeof (_a = typeof Record !== "undefined" && Record) === "function" ? _a : Object)
+], salvarClimaDataDto.prototype, "hourly_units", void 0);
+__decorate([
+    (0, class_validator_1.IsObject)(),
+    __metadata("design:type", Object)
+], salvarClimaDataDto.prototype, "hourly", void 0);
 
 
 /***/ }),
@@ -236,18 +318,68 @@ exports.ClimaSchema = exports.Clima = void 0;
 const mongoose_1 = __webpack_require__(/*! @nestjs/mongoose */ "@nestjs/mongoose");
 const common_1 = __webpack_require__(/*! @app/common */ "./libs/common/src/index.ts");
 let Clima = class Clima extends common_1.AbstractDocument {
-    table;
-    TimeStamp;
+    latitude;
+    longitude;
+    generationtime_ms;
+    utc_offset_seconds;
+    timezone;
+    timezone_abbreviation;
+    elevation;
+    hourly_units;
+    hourly;
 };
 exports.Clima = Clima;
 __decorate([
-    (0, mongoose_1.Prop)(),
-    __metadata("design:type", String)
-], Clima.prototype, "table", void 0);
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], Clima.prototype, "latitude", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ required: true }),
+    __metadata("design:type", Number)
+], Clima.prototype, "longitude", void 0);
 __decorate([
     (0, mongoose_1.Prop)(),
-    __metadata("design:type", typeof (_a = typeof Date !== "undefined" && Date) === "function" ? _a : Object)
-], Clima.prototype, "TimeStamp", void 0);
+    __metadata("design:type", Number)
+], Clima.prototype, "generationtime_ms", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Clima.prototype, "utc_offset_seconds", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Clima.prototype, "timezone", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", String)
+], Clima.prototype, "timezone_abbreviation", void 0);
+__decorate([
+    (0, mongoose_1.Prop)(),
+    __metadata("design:type", Number)
+], Clima.prototype, "elevation", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({ type: Object }),
+    __metadata("design:type", typeof (_a = typeof Record !== "undefined" && Record) === "function" ? _a : Object)
+], Clima.prototype, "hourly_units", void 0);
+__decorate([
+    (0, mongoose_1.Prop)({
+        type: {
+            time: [String],
+            temperature_2m: [Number],
+            relative_humidity_2m: [Number],
+            apparent_temperature: [Number],
+            precipitation_probability: [Number],
+            rain: [Number],
+            snowfall: [Number],
+            snow_depth: [Number],
+            visibility: [Number],
+            wind_speed_10m: [Number],
+            uv_index: [Number],
+            is_day: [Number],
+        },
+    }),
+    __metadata("design:type", Object)
+], Clima.prototype, "hourly", void 0);
 exports.Clima = Clima = __decorate([
     (0, mongoose_1.Schema)({ versionKey: false })
 ], Clima);
