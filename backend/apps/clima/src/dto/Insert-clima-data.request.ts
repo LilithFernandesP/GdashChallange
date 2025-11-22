@@ -1,4 +1,3 @@
-// dto/create-weather-log.dto.ts
 import { IsNumber, IsString, IsObject, IsArray } from 'class-validator';
 
 export class salvarClimaDataDto {

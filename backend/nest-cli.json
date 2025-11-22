@@ -36,6 +36,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
+    },
+    "insight": {
+      "type": "application",
+      "root": "apps/insight",
+      "entryFile": "main",
+      "sourceRoot": "apps/insight/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/insight/tsconfig.app.json"
+      }
     }
   }
 }

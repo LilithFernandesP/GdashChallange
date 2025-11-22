@@ -1,12 +1,12 @@
 services:
   clima:
       build:
-        context: .
+        context: ./backend
         dockerfile: ./apps/clima/Dockerfile
         target: development
       command: npm run start:dev clima
       env_file:
-        - ./apps/clima/.env
+        - backend/apps/clima/.env
       depends_on:
         - mongo
         - mongo-express

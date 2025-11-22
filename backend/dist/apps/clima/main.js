@@ -35,6 +35,9 @@ let ClimaController = class ClimaController {
     async inserirClimaData(request) {
         return this.climaService.inserirtClimaData(request);
     }
+    async listaClimaData() {
+        return this.climaService.GetAllClimaData();
+    }
 };
 exports.ClimaController = ClimaController;
 __decorate([
@@ -44,8 +47,14 @@ __decorate([
     __metadata("design:paramtypes", [typeof (_b = typeof Insert_clima_data_request_1.salvarClimaDataDto !== "undefined" && Insert_clima_data_request_1.salvarClimaDataDto) === "function" ? _b : Object]),
     __metadata("design:returntype", Promise)
 ], ClimaController.prototype, "inserirClimaData", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], ClimaController.prototype, "listaClimaData", null);
 exports.ClimaController = ClimaController = __decorate([
-    (0, common_1.Controller)(),
+    (0, common_1.Controller)('clima'),
     __metadata("design:paramtypes", [typeof (_a = typeof clima_service_1.ClimaService !== "undefined" && clima_service_1.ClimaService) === "function" ? _a : Object])
 ], ClimaController);
 
@@ -177,34 +186,8 @@ let ClimaService = class ClimaService {
     }
     async inserirtClimaData(dto) {
         try {
-            const recordsCount = dto.hourly.time.length;
-            const hourlyRecords = [];
-            for (let i = 0; i < recordsCount; i++) {
-                hourlyRecords.push({
-                    time: dto.hourly.time[i],
-                    temperature: dto.hourly.temperature_2m[i],
-                    humidity: dto.hourly.relative_humidity_2m[i],
-                    apparent_temperature: dto.hourly.apparent_temperature[i],
-                    precipitation_probability: dto.hourly.precipitation_probability[i],
-                    rain: dto.hourly.rain[i],
-                    snowfall: dto.hourly.snowfall[i],
-                    snow_depth: dto.hourly.snow_depth[i],
-                    visibility: dto.hourly.visibility[i],
-                    wind_speed: dto.hourly.wind_speed_10m[i],
-                    uv_index: dto.hourly.uv_index[i],
-                    is_day: dto.hourly.is_day[i],
-                });
-            }
             const payload = {
-                latitude: dto.latitude,
-                longitude: dto.longitude,
-                elevation: dto.elevation,
-                timezone: dto.timezone,
-                hourly_units: dto.hourly_units,
-                hourly: hourlyRecords,
-                generationtime_ms: dto.generationtime_ms,
-                utc_offset_seconds: dto.utc_offset_seconds,
-                timezone_abbreviation: dto.timezone_abbreviation,
+                ...dto,
                 createdAt: new Date(),
             };
             return await this.climaRepository.create(payload);
@@ -213,6 +196,9 @@ let ClimaService = class ClimaService {
             console.error('Erro ao salvar dados climáticos:', error);
             throw new common_1.InternalServerErrorException('Erro ao salvar dados');
         }
+    }
+    async GetAllClimaData() {
+        return await this.climaRepository.find({});
     }
 };
 exports.ClimaService = ClimaService;
@@ -441,11 +427,6 @@ class AbstractRepository {
     }
     async find(filterQuery) {
         return this.model.find(filterQuery, {}, { lean: true });
-    }
-    async startTransaction() {
-        const session = await this.connection.startSession();
-        session.startTransaction();
-        return session;
     }
 }
 exports.AbstractRepository = AbstractRepository;

@@ -5,32 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc9cbe8e-ee8c-4d72-9991-4e81daf8f359" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/.prettierrc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/src/autenticacao.controller.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/src/autenticacao.controller.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/src/autenticacao.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/src/autenticacao.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/src/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/test/app.e2e-spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/test/jest-e2e.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/autenticacao/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/clima/dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/clima/test/app.e2e-spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/clima/test/jest-e2e.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/apps/clima/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/eslint.config.mjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/libs/common/src/database/abstract.repository.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/libs/common/src/database/abstract.schema.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/libs/common/src/database/database.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/libs/common/src/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/libs/common/tsconfig.lib.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/nest-cli.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/tsconfig.build.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Clima.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Hero.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/Components/Navbar.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WorkerGo/worker.go" beforeDir="false" afterPath="$PROJECT_DIR$/WorkerGo/worker.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/clima/src/clima.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/clima/src/clima.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/clima/src/clima.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/clima/src/clima.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/apps/clima/src/dto/Insert-clima-data.request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/apps/clima/src/dto/Insert-clima-data.request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/dist/apps/clima/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/dist/apps/clima/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/libs/common/src/database/abstract.repository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/libs/common/src/database/abstract.repository.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/nest-cli.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/nest-cli.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,43 +30,83 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "LilithFernandesP"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;LilithFernandesP&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/LilithFernandesP/GdashChallange.git",
-    "accountId": "7b850374-8588-4757-94c5-d8ec4b6100ff"
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="test" />
+                    <option name="lastUsedInstant" value="1763740513" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1763740512" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/LilithFernandesP/GdashChallange.git&quot;,
+    &quot;accountId&quot;: &quot;7b850374-8588-4757-94c5-d8ec4b6100ff&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 3
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="35n0Nhn5dA7Ohu91ESEuITd5Wdv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\poder\\Documents\\Programacao\\DesafioGdash\\backend\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "http.proxy",
-    "ts.external.directory.path": "C:\\Users\\poder\\Documents\\Programacao\\DesafioGdash\\backend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.apiConsumer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;test&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\poder\\Documents\\Programacao\\DesafioGdash\\backend\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\poder\\Documents\\Programacao\\DesafioGdash\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.intellij.reactbuddy.reactComponents" value="false" />
+        <entry key="com.intellij.reactbuddy.reactInspector" value="false" />
+        <entry key="com.intellij.reactbuddy.storybook" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\poder\Documents\Programacao\DesafioGdash" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -93,6 +123,7 @@
       <option name="presentableId" value="Default" />
       <updated>1763730491326</updated>
       <workItem from="1763730495780" duration="4294000" />
+      <workItem from="1763734868853" duration="11717000" />
     </task>
     <servers />
   </component>
